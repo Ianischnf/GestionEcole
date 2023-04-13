@@ -1,9 +1,12 @@
 package fr.masuperecole.dao;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 
@@ -12,9 +15,13 @@ public class Ecole {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
-	private Long id; 
+	private int id; 
 	private String name; 
 	private double price; 
+	private boolean status;
+	
+	@OneToMany
+	private List<Class> classes;
 	
 	
 	public Ecole( String name, double price, boolean status) {
@@ -50,7 +57,16 @@ public class Ecole {
 	public Long getId() {
 		return id;
 	}
-	private boolean status;
+
+	public List<Class> getClasses() {
+		return classes;
+	}
+
+	public void setClasses(List<Class> classes) {
+		this.classes = classes;
+	}
+	
+	
 	
 }
 
