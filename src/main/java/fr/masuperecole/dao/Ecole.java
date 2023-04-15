@@ -15,7 +15,7 @@ public class Ecole {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	
-	private int id; 
+	private Long id; 
 	private String name; 
 	private double price; 
 	private boolean status;

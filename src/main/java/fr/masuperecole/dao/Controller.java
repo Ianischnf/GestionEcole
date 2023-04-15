@@ -36,18 +36,17 @@ public class Controller {
 		return er.save(ecole);
 	}
 	
-	@DeleteMapping("/ecoles")
-	public String deleteEcole(@PathVariable("id") int id) {
-		Ecole ecole = er.findById(id).orElse(null);
-		if(ecole != null) {
-			er.deleteById(id);
-			return  "Deleted";
-		} else {
-			return "Not found";
-		}
-		
-		
+	@DeleteMapping("/ecoles/{id}")
+	public String deleteEcole(@PathVariable("id") Long id) {
+	    Ecole ecole = er.findById(id).orElse(null);
+	    if (ecole != null) {
+	        er.deleteById(id);
+	        return "Deleted";
+	    } else {
+	        return "Not found";
+	    }
 	}
+
 	
 	
 }
