@@ -1,13 +1,10 @@
-package fr.masuperecole.dao;
+package dtos;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-
-@Entity
-public class Class {
+public class ClassDto {
 	
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -16,40 +13,32 @@ public class Class {
 	private int nbEleves;
 	
 	
-	
-	
-	public Class() {
-		super();
-	}
-
-	
-	public Class(String name, int nbEleves) {
-		super();
+	public ClassDto(String name, int nbEleves) {
 		this.name = name;
 		this.nbEleves = nbEleves;
 	}
 	
+	public ClassDto() {
+	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public int getNbEleves() {
 		return nbEleves;
 	}
+
 	public void setNbEleves(int nbEleves) {
 		this.nbEleves = nbEleves;
 	}
+
 	public Long getId() {
 		return id;
 	}
 	
-	
-	
-	
-	
-	
-	
-
 }

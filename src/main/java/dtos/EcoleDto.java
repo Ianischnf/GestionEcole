@@ -1,10 +1,17 @@
 package dtos;
 
+import java.util.List;
+
+import fr.masuperecole.dao.Class;
+import jakarta.persistence.OneToMany;
+
 public class EcoleDto {
 	
 	private String name;
 	private double price; 
 	private boolean status;
+	@OneToMany
+	private List<Class> classes;
 	
 	
 	public EcoleDto(String name, double price, boolean status) {
@@ -15,9 +22,6 @@ public class EcoleDto {
 	
 	public EcoleDto() {
 	}
-	
-	
-	
 	
 	public String getName() {
 		return name;

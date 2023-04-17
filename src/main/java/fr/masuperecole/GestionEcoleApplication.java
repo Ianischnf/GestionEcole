@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import fr.masuperecole.dao.Ecole;
 import fr.masuperecole.dao.EcoleRepository;
 
+import java.util.*;
+
  
 
 
@@ -23,13 +25,14 @@ public class GestionEcoleApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+
 		er.save(new Ecole("Estiam", 10000, true)); 
-		er.save(new Ecole("hetic", 64000, true)); 
-		er.save(new Ecole("ipssi", 2300, true)); 
+		er.save(new Ecole("Hetic", 64000, true)); 
+		er.save(new Ecole("IPSSI", 2300, true)); 
 		System.out.println("saved !");
 		
 		er.findAll().forEach(e->{ 
-			System.out.println("le nom de mon ecole est : " + e.getName()); 
+			System.out.println("Le nom de mon ecole est : " + e.getName()); 
 			});
 
 	}

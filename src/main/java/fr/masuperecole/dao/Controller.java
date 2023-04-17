@@ -20,11 +20,13 @@ public class Controller {
 	@Autowired
 	private EcoleRepository er;
 	
+	//lister les écoles
 	@GetMapping("/ecoles")
-		public List<Ecole> findAll(){
+		public List<Ecole> findAllEcoles(){
 			return er.findAll();
 	}
 	
+	//créer une école
 	@PostMapping("/ecoles")
 	public Ecole addEcole(@RequestBody Ecole dto ) {
 
@@ -36,6 +38,7 @@ public class Controller {
 		return er.save(ecole);
 	}
 	
+	//supprimer une école par id
 	@DeleteMapping("/ecoles/{id}")
 	public String deleteEcole(@PathVariable("id") Long id) {
 	    Ecole ecole = er.findById(id).orElse(null);
@@ -46,7 +49,23 @@ public class Controller {
 	        return "Not found";
 	    }
 	}
+	
+	//lister les classes d'une école
+	@GetMapping("/classes/{idEcole}")
+	public List<Class> findAllClasses(@PathVariable("idEcole") Long id){
+		Ecole ecole = er.findById(id).orElse(null);
+		return ecole.getClasses();
+	}
+	
+	//créer une classe
+	@PostMapping("/classes/{idEcole}")
+	public String addClass(@RequestBody Class dto, @PathVariable("idEcole") Long id) {
+		Ecole ecole = er.findById(id).orElse(null);
+		Class classe = new Class();
+		classe.setName(dto.getName()); 
+		classe.setNbEleves(dto.getNbEleves());
+		ecole.setClasses(classe);
+		return "Classe ajoutée";
+	}
 
-	
-	
 }

@@ -18,13 +18,12 @@ public class Ecole {
 	private Long id; 
 	private String name; 
 	private double price; 
-	private boolean status;
-	
+	private boolean status;	
 	@OneToMany
 	private List<Class> classes;
 	
 	
-	public Ecole( String name, double price, boolean status) {
+	public Ecole(String name, double price, boolean status) {
 		super();
 		this.name = name;
 		this.price = price;
@@ -62,11 +61,9 @@ public class Ecole {
 		return classes;
 	}
 
-	public void setClasses(List<Class> classes) {
-		this.classes = classes;
+	public void setClasses(Class classes) {
+		this.classes.add(classes);
 	}
-	
-	
 	
 }
 
