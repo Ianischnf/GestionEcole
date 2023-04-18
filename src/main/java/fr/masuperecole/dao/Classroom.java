@@ -1,7 +1,8 @@
 package fr.masuperecole.dao;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +16,8 @@ public class Classroom {
 	private Long id;
 	private String name;
 	private int nbEleves;
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne//(fetch = FetchType.LAZY)
+	@JsonBackReference
 	private Ecole ecole;
 	
 	public Classroom() {
@@ -46,6 +48,14 @@ public class Classroom {
 
 	public Long getId() {
 		return id;
+	}
+
+	public Ecole getEcole() {
+		return ecole;
+	}
+
+	public void setEcole(Ecole ecole) {
+		this.ecole = ecole;
 	}
 	
 }

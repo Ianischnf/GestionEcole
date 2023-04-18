@@ -31,15 +31,18 @@ public class GestionEcoleApplication implements CommandLineRunner {
 		List<Classroom> classes = new ArrayList<Classroom>();
 		
 		//Classroom classe1 = ;
-		classes.add(new Classroom("Class 1", 20));
+		classes.add(new Classroom("Class 1", 10));
+		classes.add(new Classroom("Class 2", 20));
+		classes.add(new Classroom("Class 3", 30));
 
-		er.save(new Ecole("Estiam", 10000, true, classes)); 
-		er.save(new Ecole("Hetic", 64000, true, null)); 
-		er.save(new Ecole("IPSSI", 2300, true, null)); 
+		er.save(new Ecole("Estiam", 10000, true));
+		er.save(new Ecole("Hetic", 64000, true)); 
+		er.save(new Ecole("IPSSI", 2300, true)); 
 		System.out.println("saved !");
 		
 		er.findAll().forEach(e->{ 
-			System.out.println("Le nom de mon ecole est : " + e.getName()); 
+			//e.setClasses(classes);
+			System.out.println("Le nom de mon ecole est : " + e.getName());
 			});
 
 	}

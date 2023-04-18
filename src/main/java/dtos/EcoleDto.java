@@ -15,11 +15,10 @@ public class EcoleDto {
 	private List<Classroom> classes;
 	
 	
-	public EcoleDto(String name, double price, boolean status, List<Classroom> classes) {
+	public EcoleDto(String name, double price, boolean status) {
 		this.name = name;
 		this.price = price;
 		this.status = status;
-		this.classes = classes;
 	}
 	
 	public EcoleDto() {
@@ -48,10 +47,12 @@ public class EcoleDto {
 		return classes;
 	}
 	
-	public void setClasses(Classroom classe) {
-		this.classes.add(classe);
+	public void setClasses(List<Classroom> classe) {
+		this.classes.addAll(classe);
 	}
 	
-	
+	public void setClasse(Classroom classe) {
+		this.classes.add(classe);
+	}
 
 }
