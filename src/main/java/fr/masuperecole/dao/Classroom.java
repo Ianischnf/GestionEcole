@@ -1,24 +1,31 @@
-package dtos;
+package fr.masuperecole.dao;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
-public class ClassDto {
-	
+
+@Entity
+public class Classroom {
 	@Id 
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String name;
 	private int nbEleves;
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Ecole ecole;
 	
-	
-	public ClassDto(String name, int nbEleves) {
-		this.name = name;
-		this.nbEleves = nbEleves;
+	public Classroom() {
+
 	}
 	
-	public ClassDto() {
+	public Classroom(String name, int nbEleves) {
+		super();
+		this.name = name;
+		this.nbEleves = nbEleves;
 	}
 
 	public String getName() {

@@ -2,14 +2,9 @@ package fr.masuperecole.dao;
 
 import java.util.List;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
 @Entity
-
 public class Ecole {
 	
 	@Id 
@@ -19,15 +14,16 @@ public class Ecole {
 	private String name; 
 	private double price; 
 	private boolean status;	
-	@OneToMany
-	private List<Class> classes;
+	@OneToMany(mappedBy = "ecole", cascade = CascadeType.ALL);
+	private List<Classroom> classes;
 	
 	
-	public Ecole(String name, double price, boolean status) {
+	public Ecole(String name, double price, boolean status, List<Classroom> classes) {
 		super();
 		this.name = name;
 		this.price = price;
 		this.status = status;
+		this.classes = classes;
 	}
 	
 	public Ecole( ) {
@@ -57,13 +53,14 @@ public class Ecole {
 		return id;
 	}
 
-	public List<Class> getClasses() {
+	public List<Classroom> getClasses() {
 		return classes;
 	}
 
-	public void setClasses(Class classes) {
-		this.classes.add(classes);
+	public void setClasses(Classroom classe) {
+		this.classes.add(classe);
 	}
 	
 }
+
 

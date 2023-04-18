@@ -52,20 +52,24 @@ public class Controller {
 	
 	//lister les classes d'une école
 	@GetMapping("/classes/{idEcole}")
-	public List<Class> findAllClasses(@PathVariable("idEcole") Long id){
+	public List<Classroom> findAllClasses(@PathVariable("idEcole") Long id){
 		Ecole ecole = er.findById(id).orElse(null);
 		return ecole.getClasses();
 	}
 	
 	//créer une classe
 	@PostMapping("/classes/{idEcole}")
-	public String addClass(@RequestBody Class dto, @PathVariable("idEcole") Long id) {
+	public String addClass(@RequestBody Classroom dto, @PathVariable("idEcole") Long id) {
 		Ecole ecole = er.findById(id).orElse(null);
-		Class classe = new Class();
-		classe.setName(dto.getName()); 
-		classe.setNbEleves(dto.getNbEleves());
-		ecole.setClasses(classe);
-		return "Classe ajoutée";
+		if (ecole != null) {
+			Classroom classe = new Classroom();
+			classe.setName(dto.getName()); 
+			classe.setNbEleves(dto.getNbEleves());
+			ecole.setClasses(classe);
+			return "Classe ajoutée";
+		} else {
+			return "Ecole non trouvée !";
+		}
 	}
 
 }

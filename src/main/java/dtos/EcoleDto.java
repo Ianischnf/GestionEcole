@@ -2,8 +2,9 @@ package dtos;
 
 import java.util.List;
 
-import fr.masuperecole.dao.Class;
+
 import jakarta.persistence.OneToMany;
+import fr.masuperecole.dao.Classroom;
 
 public class EcoleDto {
 	
@@ -11,13 +12,14 @@ public class EcoleDto {
 	private double price; 
 	private boolean status;
 	@OneToMany
-	private List<Class> classes;
+	private List<Classroom> classes;
 	
 	
-	public EcoleDto(String name, double price, boolean status) {
+	public EcoleDto(String name, double price, boolean status, List<Classroom> classes) {
 		this.name = name;
 		this.price = price;
 		this.status = status;
+		this.classes = classes;
 	}
 	
 	public EcoleDto() {
@@ -42,8 +44,13 @@ public class EcoleDto {
 		this.status = status;
 	}
 	
+	public List<Classroom> getClasses() {
+		return classes;
+	}
 	
-	
+	public void setClasses(Classroom classe) {
+		this.classes.add(classe);
+	}
 	
 	
 
