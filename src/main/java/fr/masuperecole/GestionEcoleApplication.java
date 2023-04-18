@@ -34,6 +34,9 @@ public class GestionEcoleApplication implements CommandLineRunner {
 		classes.add(new Classroom("Class 1", 10));
 		classes.add(new Classroom("Class 2", 20));
 		classes.add(new Classroom("Class 3", 30));
+		
+		Classroom cls = new Classroom("classA", 10);
+		cls.setEcole(null);
 
 		er.save(new Ecole("Estiam", 10000, true));
 		er.save(new Ecole("Hetic", 64000, true)); 
@@ -41,6 +44,11 @@ public class GestionEcoleApplication implements CommandLineRunner {
 		System.out.println("saved !");
 		
 		er.findAll().forEach(e->{ 
+			classes.forEach(c -> {
+				c.setEcole(e);
+				e.addClasse(c);
+			});
+			er.save(e);
 			//e.setClasses(classes);
 			System.out.println("Le nom de mon ecole est : " + e.getName());
 			});

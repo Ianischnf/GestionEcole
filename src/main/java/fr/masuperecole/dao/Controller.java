@@ -16,12 +16,13 @@ import org.springframework.data.domain.Pageable;
 
 import dtos.EcoleDto;
 
-@RestController
 
+@RestController
 public class Controller {
 	
 	@Autowired
 	private EcoleRepository er;
+	
 	
 	//lister les écoles
 	@GetMapping("/ecoles")
@@ -31,7 +32,7 @@ public class Controller {
 	
 	//créer une école
 	@PostMapping("/ecoles")
-	public Ecole addEcole(@RequestBody Ecole dto ) {
+	public Ecole addEcole(@RequestBody EcoleDto dto ) {
 
 		Ecole ecole = new Ecole();
 		ecole.setName(dto.getName()); 
@@ -39,6 +40,14 @@ public class Controller {
 		ecole.setStatus(dto.isStatus());
 		
 		return er.save(ecole);
+	}
+	
+	//Get Ecole by id
+	@GetMapping("/ecoles/{id}")
+	public Ecole getEcoleById(@PathVariable("id") Long id) {
+		Ecole ecole = er.findById(id).orElse(null);
+		return ecole;
+		
 	}
 	
 	//supprimer une école par id
@@ -53,15 +62,16 @@ public class Controller {
 	    }
 	}
 	
+	
 	//lister les classes d'une école
-	@GetMapping("/classes/{idEcole}")
+	@GetMapping("/ecoles/{idEcole}/classes")
 	public List<Classroom> findAllClasses(@PathVariable("idEcole") Long id){
 		Ecole ecole = er.findById(id).orElse(null);
 		return ecole.getClasses();
 	}
 	
 	//créer une classe
-	@PostMapping("/classes/{idEcole}")
+	@PostMapping("/ecoles/{idEcole}/classes")
 	public String addClass(@RequestBody Classroom dto, @PathVariable("idEcole") Long id) {
 		Ecole ecole = er.findById(id).orElse(null);
 		if (ecole != null) {
@@ -78,7 +88,7 @@ public class Controller {
 	}
 	
 	//pagination
-	@GetMapping("/pages/{page}/{size}")
+	@GetMapping("/ecoles/pages/{page}/{size}")
 	public Page<Ecole> PageableEcole(@PathVariable("page") int page, @PathVariable("size") int pageSize){
 		Pageable pageAndSize = PageRequest.of(page, pageSize);
 		Page<Ecole> pages = er.findAll(pageAndSize);
